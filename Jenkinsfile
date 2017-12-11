@@ -32,7 +32,7 @@ pipeline {
         }
 
      steps {
-	sh "mkdir /var/www/html/rectangles/all/${env.BUILD_NAME}"
+	sh "mkdir -p /var/www/html/rectangles/all/${env.BUILD_NAME}"
       sh "cp dist/rectangle_${env.BUILD_NUMBER}.jar /var/www/html/rectangles/all/${env.BUILD_NAME}/"
     }
    } 
