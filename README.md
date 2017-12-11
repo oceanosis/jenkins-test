@@ -1,3 +1,5 @@
 # jenkins-test
-pipeline - docker test
-test
+pipeline 
+
+- git / java / jenkins / docker test
+
