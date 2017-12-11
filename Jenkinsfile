@@ -60,7 +60,7 @@ pipeline {
           label 'apache'
         }
 	when {
-		branch 'development'
+		branch 'master'
 	}
 	steps {
           sh "cp /var/www/html/rectangles/all/${env.BUILD_NAME}/rectangle_${env.BUILD_NUMBER}.jar /var/www/html/rectangles/green/rectangle_${env.BUILD_NUMBER}.jar"
@@ -83,8 +83,7 @@ pipeline {
 	   sh "git checkout master"
 	   echo "Merging Dev into Master"
 	   sh "git merge development"
-	   echo "Push into Master"
-	   sh 'git config --get remote.origin.url'
+	   echo "Push into Master" 
    	   sh 'git push origin master'
 	}   
      }
