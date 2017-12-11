@@ -77,12 +77,13 @@ pipeline {
 	steps {
 	   echo "Stashing Any Local Changes"
 	   sh " git stash"
-	   echo "Checking out Development Branch"
+           echo "Checking Out Development Branch"
+           sh 'git pull origin development'
 	   sh "git checkout development"
 	   echo "Checking out Master Branch"
 	   sh "git checkout master"
 	   echo "Merging Dev into Master"
-	   sh "git merge development"
+	   sh "git merge origin development"
 	   echo "Push into Master" 
    	   sh 'git push origin master'
 	}   
