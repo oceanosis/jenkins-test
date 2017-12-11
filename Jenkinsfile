@@ -84,7 +84,8 @@ pipeline {
 	   echo "Merging Dev into Master"
 	   sh "git merge development"
 	   echo "Push into Master"
-   	   sh "git push origin master"
+	   sh 'git config --get remote.origin.url'
+   	   sh 'git push origin master'
 	}   
      }
   }
