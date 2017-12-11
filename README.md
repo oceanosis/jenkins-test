@@ -10,5 +10,5 @@
 
 - Install docker, java, jenkins, git on RH or CentOS Server
 
-MultiBranch
+MultiBranch master and development test
 
