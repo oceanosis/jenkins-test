@@ -36,7 +36,7 @@ pipeline {
       sh "cp dist/rectangle_${env.BUILD_NUMBER}.jar /var/www/html/rectangles/all/${env.BUILD_NAME}/"
     }
    } 
-    stage('Running on CentOS') {
+    stage('Test on CentOS') {
       agent {
         label 'CentOS'
         }
@@ -80,10 +80,11 @@ pipeline {
 	   echo "Checking out Development Branch"
 	   sh "git checkout development"
 	   echo "Checking out Master Branch"
-	  sh "git checkout master"
-	  echo "Merging Dev into Master"
-	  sh "git merge development"
-   	  sh "git push origin master"
+	   sh "git checkout master"
+	   echo "Merging Dev into Master"
+	   sh "git merge development"
+	   echo "Push into Master"
+   	   sh "git push origin master"
 	}   
      }
   }
