@@ -14,6 +14,18 @@ pipeline {
 	}
 
     }
+    stage('Git Info') {
+	agent any
+
+	steps {
+		echo "My Branch Name: ${env.BRANCH_NAME}"
+		script {
+		  def myLib = new jenkinsTest.git.gitStuff();
+
+		  echo "My Commit: ${myLib.gitCommit("${env.WORKSPACE}/.git")}"
+		}
+	}
+   }
     stage('Unit Tests') {
       agent {
 	label 'apache'
