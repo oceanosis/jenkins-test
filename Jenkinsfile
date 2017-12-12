@@ -98,8 +98,8 @@ pipeline {
        post {
         success {
           emailext(
-                subject: "${env.JOB_NAME} [${env.BUILD_NUMBER}] SUCCESS: Developement Promoted to Master"
-                body: """<p>Check console output</p><p>'${JOB_NAME} : ${env.BUILD_URL}'</p>"""
+                subject: "${env.JOB_NAME} [${env.BUILD_NUMBER}] SUCCESS: Developement Promoted to Master",
+                body: """<p>Check console output</p><p>'${JOB_NAME} : ${env.BUILD_URL}'</p>""",
                 to: "dumluufuk@gmail.com"
           )
         }
@@ -109,8 +109,8 @@ pipeline {
      post {
 	failure {
 	  emailext(
-		subject: "${env.JOB_NAME} [${env.BUILD_NUMBER}] Failed"
-		body: """<p>Check console output</p><p>'${JOB_NAME} : ${env.BUILD_URL}'</p>"""
+		subject: "${env.JOB_NAME} [${env.BUILD_NUMBER}] Failed",
+		body: """<p>Check console output</p><p>'${JOB_NAME} : ${env.BUILD_URL}'</p>""",
 		to: "dumluufuk@gmail.com"
 	  )
 	}
