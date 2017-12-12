@@ -59,7 +59,7 @@ pipeline {
 	sh "java -jar rectangle_${env.MAJOR_VERSION}.${env.BUILD_NUMBER}.jar 5 8"
  	}
     }
-  stage('Promote to Green'){
+  stage('Promote to Green - PRODUCTION'){
 	agent {
           label 'apache'
         }
@@ -95,6 +95,26 @@ pipeline {
 	sh "git tag rectangle-${env.MAJOR_VERSION}.${env.BUILD_NUMBER}"
 	sh "git push origin rectangle-${env.MAJOR_VERSION}.${env.BUILD_NUMBER}"
 	}   
+       post {
+        success {
+          emailext(
+                subject: "${env.JOB_NAME} [${env.BUILD_NUMBER}] SUCCESS: Developement Promoted to Master"
+                body: "<p>Check console output</p><p>${JOB_NAME} : ${env.BUILD_URL}</p>"
+                to: "dumluufuk@gmail.com"
+          )
+        }
+       }
+
+
+     }
+     post {
+	failure {
+	  emailext(
+		subject: "${env.JOB_NAME} [${env.BUILD_NUMBER}] Failed"
+		body: "<p>Check console output</p><p>${JOB_NAME} : ${env.BUILD_URL}</p>"
+		to: "dumluufuk@gmail.com"
+	  )
+	}
      }
   }
 }
