@@ -103,10 +103,9 @@ pipeline {
                 to: "dumluufuk@gmail.com"
           )
         }
-       }
-
-
-     }
+       } 
+    }
+  }
      post {
 	failure {
 	  emailext(
@@ -116,5 +115,4 @@ pipeline {
 	  )
 	}
      }
-  }
 }
