@@ -28,7 +28,7 @@ pipeline {
    }
     stage('Unit Tests') {
       agent {
-	label 'apache'
+	label 'slave'
   	}
       steps {
         sh 'ant -f test.xml -v'
@@ -37,7 +37,7 @@ pipeline {
     }
     stage('build') {
       agent {
-        label 'apache'
+        label 'slave'
         }
 
       steps {
@@ -52,7 +52,7 @@ pipeline {
     }
     stage('deploy') {
       agent {
-        label 'apache'
+        label 'slave'
         }
 
      steps {
@@ -62,11 +62,11 @@ pipeline {
    } 
     stage('Test on CentOS') {
       agent {
-        label 'CentOS'
+        docker 'centos:centos7'
         }
 
      steps {
-      sh "wget http://18.194.247.142/rectangles/all/${env.BRANCH_NAME}/rectangle_${env.MAJOR_VERSION}.${env.BUILD_NUMBER}.jar"
+      sh "wget http://192.168.0.91:10000/rectangles/all/${env.BRANCH_NAME}/rectangle_${env.MAJOR_VERSION}.${env.BUILD_NUMBER}.jar"
       sh "java -jar rectangle_${env.MAJOR_VERSION}.${env.BUILD_NUMBER}.jar 10 10"
     }
    }
@@ -75,13 +75,13 @@ pipeline {
 	docker 'openjdk:8u121-jre'
      }
      steps {
-	sh "wget http://18.194.247.142/rectangles/all/${env.BRANCH_NAME}/rectangle_${env.MAJOR_VERSION}.${env.BUILD_NUMBER}.jar"
+	sh "wget http://192.168.0.91:10000/rectangles/all/${env.BRANCH_NAME}/rectangle_${env.MAJOR_VERSION}.${env.BUILD_NUMBER}.jar"
 	sh "java -jar rectangle_${env.MAJOR_VERSION}.${env.BUILD_NUMBER}.jar 5 8"
  	}
     }
   stage('Promote to Green - PRODUCTION'){
 	agent {
-          label 'apache'
+          label 'slave'
         }
 	when {
 		branch 'master'
@@ -93,7 +93,7 @@ pipeline {
     }
     stage('Promote Development Branch to Master') {
         agent {
-          label 'apache'
+          label 'slave'
         }
 	when {
                 branch 'development'
